@@ -39,20 +39,21 @@ android {
         applicationId "com.example.flutter_app"
         // You can update the following values to match your application needs. 
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-build-configuration.
-        minSdkVersion flutter.minSdkVersion
-        targetSdkVersion 21 //flutter.targetSdkVersion
+        minSdkVersion 21//flutter.minSdkVersion
+        targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
 
     signingConfigs {
-        releaseSigningConfig {
-            storeFile rootProject.file("app/testapp.jks")
-            storePassword System.getProperty("APPCENTER_KEYSTORE_PASSWORD")
-            keyAlias System.getProperty("APPCENTER_KEY_ALIAS")
-            keyPassword System.getProperty("APPCENTER_KEY_PASSWORD")
+        release {
+            storeFile rootProject.file("app/android.keystore")
+            storePassword System.getenv("APPCENTER_KEYSTORE_PASSWORD")
+            keyAlias System.getenv("APPCENTER_KEY_ALIAS")
+            keyPassword System.getenv("APPCENTER_KEY_PASSWORD")
         }
     }
+
 
     buildTypes {
         
@@ -61,7 +62,7 @@ android {
         }
         
         release {
-            signingConfig signingConfigs.releaseSigningConfig
+            signingConfig signingConfigs.release
         }
     }
 }
