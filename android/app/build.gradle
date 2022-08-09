@@ -53,18 +53,12 @@ android {
             keyPassword System.getenv("APPCENTER_KEY_PASSWORD")
         }
     }
-
-
     buildTypes {
-        
-        debug {
-            signingConfig signingConfigs.debug
-        }
-        
         release {
             signingConfig signingConfigs.release
         }
     }
+
 }
 
 flutter {
