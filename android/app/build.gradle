@@ -45,11 +45,25 @@ android {
         versionName flutterVersionName
     }
 
+    signingConfigs {
+        release {
+            storeFile rootProject.file("app/android.keystore")
+            storePassword System.getenv("APPCENTER_KEYSTORE_PASSWORD")
+            keyAlias System.getenv("APPCENTER_KEY_ALIAS")
+            keyPassword System.getenv("APPCENTER_KEY_PASSWORD")
+        }
+    }
+
+
 
     buildTypes {
         
-        release {
+        debug {
             signingConfig signingConfigs.debug
+        }
+        
+        release {
+            signingConfig signingConfigs.release
         }
     }
 }
@@ -57,3 +71,10 @@ android {
 flutter {
     source '../..'
 }
+
+dependencies {
+    def appCenterSdkVersion = '4.3.1'
+    implementation "com.microsoft.appcenter:appcenter-analytics:${appCenterSdkVersion}"
+    implementation "com.microsoft.appcenter:appcenter-crashes:${appCenterSdkVersion}"
+}
+
